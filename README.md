@@ -1,6 +1,6 @@
 # 🦷 AuraDental Studio — Modern Dental Clinic Web Application
 
-![AuraDental Studio Preview](Bright%20smile%20doctor.jpg)
+![AuraDental Studio Preview](Screenshot.png)
 
 AuraDental Studio is a modern, responsive, and highly interactive web application designed for a luxury aesthetic dental clinic. It provides patients with a seamless experience to explore dental procedures, preview whitening results interactively, book appointments through a step-by-step wizard, and authenticate.
 
