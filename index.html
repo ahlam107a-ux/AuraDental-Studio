@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraDental Studio | Advanced Aesthetic & Family Dentistry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            dark: '#0f172a',
+                            slate: '#1e293b'
+                        },
+                        accent: {
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            gold: '#f59e0b'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0d9488 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0d9488;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 glass-panel rounded-2xl mt-3 px-6 shadow-sm">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-cyan flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-bold text-xl fa-tooth"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-extrabold tracking-tight text-slate-900 leading-none">AuraDental</span>
+                        <span class="text-[10px] font-semibold text-brand-600 tracking-widest uppercase">Studio</span>
+                    </div>
+                    <!-- Local Image Tag for Logo with Fallback -->
+                    <img src="Dental clinic logo transparent.png" alt="AuraDental Logo" class="h-8 w-auto hidden sm:block object-contain ml-2" onerror="this.style.display='none'">
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden xl:flex items-center gap-6">
+                    <a href="#home" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">Home</a>
+                    <a href="#about" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">About Us</a>
+                    <a href="#services" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">Services</a>
+                    <a href="#doctors" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">Doctors</a>
+                    <a href="#results" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">Before & After</a>
+                    <a href="#tour" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">Clinic Tour</a>
+                    <button onclick="openShadeSimulator()" class="text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors flex items-center gap-1 bg-brand-50 px-2.5 py-1 rounded-lg border border-brand-200">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Shade Simulator
+                    </button>
+                    <a href="#contact" class="text-xs font-bold text-slate-700 hover:text-brand-600 transition-colors">Contact Us</a>
+                </nav>
+
+                <!-- Actions / Auth Button -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <div id="user-profile-badge" class="hidden items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full border border-emerald-200 text-xs font-semibold">
+                        <i class="fa-solid fa-user-circle text-sm"></i>
+                        <span id="user-name-display">Patient</span>
+                        <button onclick="logoutUser()" class="ml-1 text-slate-400 hover:text-rose-500"><i class="fa-solid fa-sign-out-alt"></i></button>
+                    </div>
+
+                    <button onclick="openAuthModal()" id="auth-btn" class="text-xs font-bold text-slate-700 hover:text-brand-600 px-3 py-2 rounded-xl transition-colors">
+                        Sign In / Register
+                    </button>
+                    
+                    <button onclick="openBookingModal()" class="bg-gradient-to-r from-brand-600 to-accent-cyan hover:from-brand-500 hover:to-accent-cyan text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all">
+                        Book Appointment
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button onclick="toggleMobileMenu()" class="xl:hidden text-slate-700 hover:text-brand-600 p-2 text-xl focus:outline-none">
+                    <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden xl:hidden glass-panel mx-4 mt-2 rounded-2xl p-6 shadow-xl border border-slate-200 flex-col gap-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">About Us</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">Services</a>
+            <a href="#doctors" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">Doctors</a>
+            <a href="#results" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">Before & After</a>
+            <a href="#tour" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">Clinic Tour</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-sm font-semibold text-slate-800">Contact Us</a>
+            <button onclick="toggleMobileMenu(); openShadeSimulator()" class="text-left text-sm font-bold text-brand-600">
+                <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Whitening Shade Simulator
+            </button>
+            <hr class="border-slate-200 my-1">
+            <div class="flex flex-col gap-2">
+                <button onclick="toggleMobileMenu(); openAuthModal()" class="w-full text-center py-2.5 rounded-xl border border-slate-300 font-bold text-xs text-slate-700">Sign In / Register</button>
+                <button onclick="toggleMobileMenu(); openBookingModal()" class="w-full text-center py-2.5 rounded-xl bg-brand-600 font-bold text-xs text-white shadow-md">Book Appointment</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="relative pt-36 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-brand-800 text-xs font-bold tracking-wider uppercase shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                        Premium Aesthetic Dentistry
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+                        Your Perfect Smile <br>
+                        <span class="text-gradient">Starts Right Here</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                        Experience gentle, painless, state-of-the-art dental care. From laser teeth whitening to precision implants, we craft confident, healthy smiles every day.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 to-accent-cyan text-white font-bold shadow-xl shadow-brand-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                            <i class="fa-regular fa-calendar-check text-lg"></i>
+                            <span>Schedule Appointment</span>
+                        </button>
+                        
+                        <a href="#services" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-slate-700 hover:text-brand-600 font-bold border border-slate-200 shadow-sm hover:border-brand-200 hover:bg-brand-50/50 transition-all text-center">
+                            Explore Services
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image Right -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200 aspect-[4/5] group">
+                            <!-- Local Image for Hero Banner -->
+                            <img src="Bright smile doctor.jpg" 
+                                 alt="Bright smile doctor" 
+                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <span class="bg-brand-500/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Lead Specialist</span>
+                                <h3 class="text-lg font-bold mt-2">Dr. Marcus Vance</h3>
+                                <p class="text-xs text-slate-200">Senior Cosmetic Dentist</p>
+                            </div>
+                        </div>
+
+                        <!-- Badge Overlay Card -->
+                        <div class="absolute -top-6 -left-6 z-20 glass-panel p-4 rounded-2xl shadow-xl flex items-center gap-3 animate-float">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-800">5.0 Star Rating</p>
+                                <p class="text-[10px] text-slate-500">Over 2,400+ reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-slate-100/70 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-brand-600 text-xs font-extrabold uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full border border-brand-200">About AuraDental</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Redefining Dental Care With Comfort & Innovation</h2>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        At AuraDental Studio, we believe visiting the dentist should be a relaxing, transparent, and pain-free experience. Our practice combines advanced German dental engineering with personalized patient care.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                            <i class="fa-solid fa-shield-virus text-brand-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">100% Sterile Tech</h4>
+                            <p class="text-xs text-slate-500 mt-1">Multi-stage UV sterilizers and hospital-grade protocol.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                            <i class="fa-solid fa-heart-pulse text-brand-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-slate-900 text-sm">Painless Guarantee</h4>
+                            <p class="text-xs text-slate-500 mt-1">Advanced needle-free anesthesia option for maximum comfort.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 text-center">
+                        <p class="text-4xl font-extrabold text-brand-600">15k+</p>
+                        <p class="text-xs font-bold text-slate-700 mt-1">Satisfied Patients</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 text-center">
+                        <p class="text-4xl font-extrabold text-brand-600">99.8%</p>
+                        <p class="text-xs font-bold text-slate-700 mt-1">Painless Feedback</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 text-center">
+                        <p class="text-4xl font-extrabold text-brand-600">12+</p>
+                        <p class="text-xs font-bold text-slate-700 mt-1">Years Experience</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 text-center">
+                        <p class="text-4xl font-extrabold text-brand-600">24/7</p>
+                        <p class="text-xs font-bold text-slate-700 mt-1">Emergency Service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 text-xs font-extrabold uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Our Specializations</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Painless & Premium Treatments</h2>
+                <p class="text-slate-600 mt-3 text-sm sm:text-base">Designed for comfort, speed, and breathtaking aesthetic results.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Service 1: Whitening -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200/80 hover:border-brand-300 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                            <!-- Local Image Tag -->
+                            <img src="Teeth whitening procedure.jpg" 
+                                 alt="Teeth whitening procedure" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80';">
+                            <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-md text-brand-600 text-[10px] font-bold px-2.5 py-1 rounded-full">Most Popular</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Laser Whitening</h3>
+                        <p class="text-slate-600 text-xs mt-2 leading-relaxed">Brighten your smile by up to 8 shades in a single 45-minute laser session.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <button onclick="openShadeSimulator()" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Try Simulator
+                        </button>
+                        <button onclick="openBookingModal('Teeth Whitening')" class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-brand-500 group-hover:text-white transition-colors flex items-center justify-center text-slate-600 text-xs">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 2: Braces -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200/80 hover:border-brand-300 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                            <!-- Local Image Tag -->
+                            <img src="Dental braces close up.jpg" 
+                                 alt="Dental braces close up" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80';">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Invisalign & Braces</h3>
+                        <p class="text-slate-600 text-xs mt-2 leading-relaxed">Clear aligners & ceramic braces tailored with 3D digital scan modeling.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500">Duration: 6-12 mos</span>
+                        <button onclick="openBookingModal('Dental Braces')" class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-brand-500 group-hover:text-white transition-colors flex items-center justify-center text-slate-600 text-xs">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 3: Implants -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200/80 hover:border-brand-300 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                            <!-- Local Image Tag -->
+                            <img src="Dental implant concept.jpg" 
+                                 alt="Dental implant concept" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80';">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Precision Implants</h3>
+                        <p class="text-slate-600 text-xs mt-2 leading-relaxed">Swiss titanium implants with natural porcelain crowns restoring full bite function.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-600"><i class="fa-solid fa-infinity"></i> Lifetime Guarantee</span>
+                        <button onclick="openBookingModal('Dental Implants')" class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-brand-500 group-hover:text-white transition-colors flex items-center justify-center text-slate-600 text-xs">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 4: Pediatric -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200/80 hover:border-brand-300 shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100">
+                            <!-- Local Image Tag -->
+                            <img src="Pediatric dentistry child dentist.jpg" 
+                                 alt="Pediatric dentistry child dentist" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80';">
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Pediatric Care</h3>
+                        <p class="text-slate-600 text-xs mt-2 leading-relaxed">Fun, stress-free environment specifically crafted to make children feel safe.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-500"><i class="fa-solid fa-heart"></i> Gentle Care</span>
+                        <button onclick="openBookingModal('Pediatric Care')" class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-brand-500 group-hover:text-white transition-colors flex items-center justify-center text-slate-600 text-xs">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 text-xs font-extrabold uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Medical Board</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Meet Our Specialists</h2>
+                <p class="text-slate-600 mt-2 text-sm">Internationally certified dental surgeons committed to aesthetic excellence.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Doctor 1 -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200 text-center hover:shadow-xl transition-all group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-brand-100 shadow-md">
+                        <img src="Dr Marcus Vance.jpg" 
+                             alt="Dr. Marcus Vance" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80';">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Dr. Marcus Vance</h3>
+                    <p class="text-xs font-semibold text-brand-600 mb-2">Cosmetic Dentistry Lead</p>
+                    <p class="text-slate-500 text-xs leading-relaxed mb-4">14+ years experience in digital smile design, veneers, and full mouth rehabilitation.</p>
+                    <button onclick="openBookingModal('General Consultation', 'Dr. Marcus Vance')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-bold text-xs transition-colors">
+                        Book With Dr. Marcus
+                    </button>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200 text-center hover:shadow-xl transition-all group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-brand-100 shadow-md">
+                        <img src="Dr Ethan Cole.jpg" 
+                             alt="Dr. Ethan Cole" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80';">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Dr. Ethan Cole</h3>
+                    <p class="text-xs font-semibold text-brand-600 mb-2">Orthodontic Specialist</p>
+                    <p class="text-slate-500 text-xs leading-relaxed mb-4">Certified Diamond Invisalign Provider specializing in adult & youth teeth alignment.</p>
+                    <button onclick="openBookingModal('Dental Braces', 'Dr. Ethan Cole')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-bold text-xs transition-colors">
+                        Book With Dr. Ethan
+                    </button>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-200 text-center hover:shadow-xl transition-all group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-4 border-brand-100 shadow-md">
+                        <img src="Dr Julian Hayes.jpg" 
+                             alt="Dr. Julian Hayes" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80';">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Dr. Julian Hayes</h3>
+                    <p class="text-xs font-semibold text-brand-600 mb-2">Implantologist & Surgeon</p>
+                    <p class="text-slate-500 text-xs leading-relaxed mb-4">Specialist in immediate titanium implant placement and computer-guided surgery.</p>
+                    <button onclick="openBookingModal('Dental Implants', 'Dr. Julian Hayes')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-bold text-xs transition-colors">
+                        Book With Dr. Julian
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="results" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent-cyan text-xs font-extrabold uppercase tracking-widest bg-slate-800 px-3 py-1 rounded-full border border-slate-700">Real Transformations</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">Interactive Before & After Results</h2>
+                <p class="text-slate-400 mt-2 text-sm">Drag or swipe the handle to reveal laser whitening & cosmetic results.</p>
+            </div>
+
+            <!-- Interactive Before & After Container -->
+            <div class="max-w-4xl mx-auto">
+                <div id="ba-container" class="relative h-[380px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-700 select-none cursor-ew-resize">
+                    
+                    <!-- After Image -->
+                    <img src="Teeth before and after result.jpg" 
+                         alt="Teeth before and after result - After" 
+                         class="absolute inset-0 w-full h-full object-cover"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80';">
+                    <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-extrabold px-3 py-1.5 rounded-full shadow-lg">AFTER</span>
+
+                    <!-- Before Image Overlay (Clipped) -->
+                    <div id="ba-before-wrapper" class="absolute inset-y-0 left-0 w-1/2 overflow-hidden border-r-2 border-white shadow-2xl bg-slate-800">
+                        <img src="Teeth before and after result.jpg" 
+                             alt="Teeth before and after result - Before" 
+                             class="absolute inset-0 w-full h-full object-cover filter brightness-75 contrast-125 sepia-[0.3]"
+                             style="max-width: none;" id="ba-before-img"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80';">
+                        <span class="absolute top-4 left-4 bg-slate-900/80 text-white text-xs font-extrabold px-3 py-1.5 rounded-full backdrop-blur-sm">BEFORE</span>
+                    </div>
+
+                    <!-- Divider Handle Bar -->
+                    <div id="ba-handle" class="absolute inset-y-0 left-1/2 -ml-4 w-8 flex items-center justify-center pointer-events-none">
+                        <div class="w-8 h-8 rounded-full bg-white text-slate-900 shadow-xl flex items-center justify-center text-xs font-bold">
+                            <i class="fa-solid fa-arrows-left-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tour" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-brand-600 text-xs font-extrabold uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full border border-brand-200">Virtual Clinic Tour</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Luxury Meets Advanced Medical Science</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        We designed our studio to eliminate traditional dental anxiety. Enjoy acoustic isolation rooms, soothing ambient lighting, and modern treatment units.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold flex-shrink-0">
+                                <i class="fa-solid fa-couch"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Serene Waiting Lounge</h4>
+                                <p class="text-xs text-slate-500 mt-1">Fresh espresso machine, acoustic insulation, and tranquil lounge area.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-accent-cyan/10 text-accent-cyan flex items-center justify-center font-bold flex-shrink-0">
+                                <i class="fa-solid fa-microscope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Ultra-Modern Treatment Chairs</h4>
+                                <p class="text-xs text-slate-500 mt-1">High-definition 3D intraoral scanners & German-built ergonomic dental chairs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fixed Interactive Gallery Container -->
+                <div class="lg:col-span-6">
+                    <div class="bg-white p-4 rounded-3xl shadow-xl border border-slate-200 space-y-4">
+                        <!-- Main View Container -->
+                        <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden bg-slate-100">
+                            <img id="tour-main-img" 
+                                 src="Dental waiting room.jpg" 
+                                 alt="Dental waiting room" 
+                                 class="w-full h-full object-cover transition-all duration-500"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=800&q=80';">
+                            <div class="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl" id="tour-caption">
+                                Reception & Waiting Lounge
+                            </div>
+                        </div>
+
+                        <!-- Gallery Selector Buttons -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="switchTourImage('Dental waiting room.jpg', 'Reception & Waiting Lounge', 'https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=800&q=80', this)" 
+                                    class="tour-thumb border-2 border-brand-500 rounded-xl overflow-hidden h-24 relative group focus:outline-none">
+                                <img src="Dental waiting room.jpg" 
+                                     alt="Dental waiting room thumbnail" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=400&q=80';">
+                                <span class="absolute inset-0 bg-slate-900/40 flex items-center justify-center text-white text-xs font-bold">Lounge</span>
+                            </button>
+
+                            <button onclick="switchTourImage('Dental chair modern unit.jpg', 'Treatment Suite', 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80', this)" 
+                                    class="tour-thumb border-2 border-transparent rounded-xl overflow-hidden h-24 relative group focus:outline-none">
+                                <img src="Dental chair modern unit.jpg" 
+                                     alt="Dental chair modern unit thumbnail" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=400&q=80';">
+                                <span class="absolute inset-0 bg-slate-900/40 flex items-center justify-center text-white text-xs font-bold">Treatment Suite</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 text-xs font-extrabold uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full border border-brand-200">Get In Touch</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Visit Or Message Our Studio</h2>
+                <p class="text-slate-600 mt-2 text-sm">We are here to answer all your dental care questions.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Contact Information & Map -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">Clinic Address</h4>
+                                <p class="text-xs text-slate-500">Building 42, Nile Avenue, Zamalek, Cairo</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">Phone / Emergency</h4>
+                                <p class="text-xs text-slate-500">+20 100 000 0000</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900">Opening Hours</h4>
+                                <p class="text-xs text-slate-500">Sat - Thu: 10:00 AM - 10:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulated Google Map Embed -->
+                    <div class="h-56 rounded-3xl overflow-hidden shadow-sm border border-slate-200 relative bg-slate-200">
+                        <div class="absolute inset-0 bg-slate-800/80 flex flex-col items-center justify-center text-white p-4 text-center">
+                            <i class="fa-solid fa-map-location-dot text-4xl text-brand-500 mb-2"></i>
+                            <p class="font-bold text-sm">AuraDental Studio Cairo</p>
+                            <p class="text-xs text-slate-300 mt-0.5">Zamalek, Nile Promenade</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="lg:col-span-7 bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4">Send Us a Quick Message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Your Name</label>
+                                <input type="text" required placeholder="John Doe" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number</label>
+                                <input type="tel" required placeholder="+20 100 000 0000" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Inquiry Details</label>
+                            <textarea rows="4" required placeholder="How can we help your smile today?" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs shadow-md transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="contact-success-msg" class="hidden mt-4 p-3 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-bold text-center">
+                        Message received! Our receptionist will call you within 15 minutes.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="shade-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative animate-fade-in border border-slate-100">
+            <button onclick="closeShadeSimulator()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 font-bold text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center">
+                <span class="text-brand-600 text-xs font-extrabold uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Interactive Tool</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 mt-2">Whitening Shade Simulator</h3>
+                <p class="text-xs text-slate-500 mt-1">Slide to preview how laser whitening brightens your enamel shade.</p>
+            </div>
+
+            <!-- Tooth Color Preview Box -->
+            <div class="mt-8 p-8 rounded-2xl bg-slate-900 text-center flex flex-col items-center justify-center transition-colors" id="shade-preview-box">
+                <i class="fa-solid fa-tooth text-7xl transition-colors duration-300" id="tooth-icon" style="color: #fef08a;"></i>
+                <p class="text-white font-bold text-lg mt-4" id="shade-label">Shade level: Moderate Stain (A3)</p>
+                <p class="text-slate-400 text-xs mt-1" id="shade-desc">Common everyday coffee & food enamel discoloration.</p>
+            </div>
+
+            <!-- Slider Control -->
+            <div class="mt-6 space-y-2">
+                <div class="flex justify-between text-xs font-bold text-slate-600">
+                    <span>Stained Enamel</span>
+                    <span>Hollywood White</span>
+                </div>
+                <input type="range" id="shade-slider" min="1" max="5" value="2" oninput="updateShadeSimulator(this.value)"
+                       class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-600">
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <button onclick="closeShadeSimulator()" class="w-1/2 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50">Close</button>
+                <button onclick="closeShadeSimulator(); openBookingModal('Teeth Whitening')" class="w-1/2 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs shadow-lg shadow-brand-500/30">Book Whitening Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 font-bold text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Wizard Header & Progress -->
+            <div class="mb-8">
+                <h3 class="text-xl font-extrabold text-slate-900">Book Your Dental Visit</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Quick & automated instant reservation</p>
+
+                <div class="flex items-center justify-between mt-6 relative">
+                    <div class="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -z-10 -translate-y-1/2"></div>
+                    <div id="wizard-bar" class="absolute top-1/2 left-0 h-1 bg-brand-600 -z-10 -translate-y-1/2 transition-all duration-300 w-0"></div>
+
+                    <div class="step-dot w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center text-xs font-bold" id="dot-step-1">1</div>
+                    <div class="step-dot w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold" id="dot-step-2">2</div>
+                    <div class="step-dot w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold" id="dot-step-3">3</div>
+                </div>
+            </div>
+
+            <!-- STEP 1: Select Service & Doctor -->
+            <div id="booking-step-1" class="wizard-step space-y-4">
+                <h4 class="font-bold text-sm text-slate-800 uppercase tracking-wider">Step 1: Choose Service & Doctor</h4>
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Select Treatment</label>
+                    <select id="book-service" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:border-brand-500 outline-none">
+                        <option value="General Consultation">General Checkup & Consultation</option>
+                        <option value="Teeth Whitening">Laser Teeth Whitening</option>
+                        <option value="Dental Braces">Invisalign & Braces</option>
+                        <option value="Dental Implants">Precision Dental Implants</option>
+                        <option value="Pediatric Care">Pediatric Dental Care</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Select Preferred Specialist</label>
+                    <select id="book-doctor" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:border-brand-500 outline-none">
+                        <option value="Any Available Specialist">First Available Dentist</option>
+                        <option value="Dr. Marcus Vance">Dr. Marcus Vance (Cosmetics)</option>
+                        <option value="Dr. Ethan Cole">Dr. Ethan Cole (Orthodontics)</option>
+                        <option value="Dr. Julian Hayes">Dr. Julian Hayes (Implants/Surgery)</option>
+                    </select>
+                </div>
+
+                <button onclick="goToBookingStep(2)" class="w-full py-3 mt-4 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-500 shadow-md">Next: Select Date & Time &rarr;</button>
+            </div>
+
+            <!-- STEP 2: Choose Date & Slot -->
+            <div id="booking-step-2" class="wizard-step hidden space-y-4">
+                <h4 class="font-bold text-sm text-slate-800 uppercase tracking-wider">Step 2: Choose Appointment Date</h4>
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Date</label>
+                    <input type="date" id="book-date" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:border-brand-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-2">Available Time Slots</label>
+                    <div class="grid grid-cols-3 gap-2" id="time-slots">
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn p-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-brand-500 hover:bg-brand-50">10:00 AM</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn p-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-brand-500 hover:bg-brand-50">12:30 PM</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn p-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-brand-500 hover:bg-brand-50">03:00 PM</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn p-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-brand-500 hover:bg-brand-50">05:30 PM</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn p-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-brand-500 hover:bg-brand-50">07:00 PM</button>
+                        <button type="button" onclick="selectTimeSlot(this)" class="time-slot-btn p-2.5 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-brand-500 hover:bg-brand-50">08:30 PM</button>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button onclick="goToBookingStep(1)" class="w-1/2 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs">Back</button>
+                    <button onclick="goToBookingStep(3)" class="w-1/2 py-3 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-500">Next: Contact Info &rarr;</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Contact & Confirmation -->
+            <div id="booking-step-3" class="wizard-step hidden space-y-4">
+                <h4 class="font-bold text-sm text-slate-800 uppercase tracking-wider">Step 3: Patient Information</h4>
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" id="patient-name" placeholder="John Doe" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number</label>
+                    <input type="tel" id="patient-phone" placeholder="+20 100 000 0000" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button onclick="goToBookingStep(2)" class="w-1/2 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs">Back</button>
+                    <button onclick="confirmBooking()" class="w-1/2 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/20">Confirm Booking</button>
+                </div>
+            </div>
+
+            <!-- SUCCESS CONFIRMATION -->
+            <div id="booking-success" class="hidden text-center py-8 space-y-4">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">Appointment Reserved!</h3>
+                <p class="text-xs text-slate-500 max-w-sm mx-auto">We have sent a confirmation message to your phone. We look forward to seeing your smile!</p>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left text-xs space-y-1.5 max-w-md mx-auto font-medium">
+                    <p><strong class="text-slate-800">Service:</strong> <span id="summary-service">-</span></p>
+                    <p><strong class="text-slate-800">Doctor:</strong> <span id="summary-doctor">-</span></p>
+                    <p><strong class="text-slate-800">Date & Time:</strong> <span id="summary-datetime">-</span></p>
+                </div>
+                <button onclick="closeBookingModal()" class="px-6 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs">Done</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 font-bold text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Auth Tabs -->
+            <div class="flex border-b border-slate-200 mb-6">
+                <button id="auth-tab-login" onclick="switchAuthTab('login')" class="w-1/2 pb-3 font-extrabold text-sm border-b-2 border-brand-600 text-brand-600">Log In</button>
+                <button id="auth-tab-register" onclick="switchAuthTab('register')" class="w-1/2 pb-3 font-extrabold text-sm border-b-2 border-transparent text-slate-400 hover:text-slate-600">Register</button>
+            </div>
+
+            <!-- Form -->
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                <div id="field-name" class="hidden">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" id="auth-name" placeholder="Dr. Patient Name" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                    <input type="email" id="auth-email" required placeholder="patient@example.com" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Password</label>
+                    <input type="password" id="auth-pass" required placeholder="••••••••" class="w-full p-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-brand-500">
+                </div>
+
+                <button type="submit" id="auth-submit-btn" class="w-full py-3 mt-2 rounded-xl bg-gradient-to-r from-brand-600 to-accent-cyan text-white font-bold text-xs shadow-lg shadow-brand-500/25">
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8">
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <span class="text-lg font-extrabold text-white">AuraDental</span>
+                </div>
+                <p class="text-xs leading-relaxed">Painless aesthetic dentistry crafted with warmth, passion, and precision technology.</p>
+            </div>
+
+            <div>
+                <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Quick Navigation</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#home" class="hover:text-white">Home</a></li>
+                    <li><a href="#about" class="hover:text-white">About Us</a></li>
+                    <li><a href="#services" class="hover:text-white">Services</a></li>
+                    <li><a href="#doctors" class="hover:text-white">Doctors</a></li>
+                    <li><a href="#results" class="hover:text-white">Before & After</a></li>
+                    <li><a href="#contact" class="hover:text-white">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Opening Hours</h4>
+                <ul class="space-y-2 text-xs">
+                    <li>Sat - Thu: 10:00 AM - 10:00 PM</li>
+                    <li>Friday: 02:00 PM - 09:00 PM</li>
+                    <li class="text-emerald-400 font-semibold"><i class="fa-solid fa-phone mr-1"></i> 24/7 Emergency Care</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-3">Location</h4>
+                <p class="text-xs leading-relaxed">Building 42, Nile Promenade Avenue, Zamalek, Cairo, Egypt.</p>
+                <div class="flex gap-3 mt-4 text-slate-400 text-sm">
+                    <a href="#" class="hover:text-brand-500"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-brand-500"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-brand-500"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-slate-800 text-center text-[11px] text-slate-500">
+            &copy; 2026 AuraDental Studio. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        let currentAuthMode = 'login';
+        let selectedTimeSlot = '';
+        let currentUser = null;
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Before & After Interactive Drag Handle
+        const baContainer = document.getElementById('ba-container');
+        const baBeforeWrapper = document.getElementById('ba-before-wrapper');
+        const baHandle = document.getElementById('ba-handle');
+        let isDragging = false;
+
+        if (baContainer) {
+            const updateSliderPos = (x) => {
+                const rect = baContainer.getBoundingClientRect();
+                let pos = (x - rect.left) / rect.width;
+                if (pos < 0.05) pos = 0.05;
+                if (pos > 0.95) pos = 0.95;
+                
+                baBeforeWrapper.style.width = `${pos * 100}%`;
+                baHandle.style.left = `${pos * 100}%`;
+            };
+
+            baContainer.addEventListener('mousedown', (e) => { isDragging = true; updateSliderPos(e.clientX); });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            window.addEventListener('mousemove', (e) => { if (isDragging) updateSliderPos(e.clientX); });
+
+            baContainer.addEventListener('touchstart', (e) => { isDragging = true; updateSliderPos(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => { isDragging = false; });
+            window.addEventListener('touchmove', (e) => { if (isDragging) updateSliderPos(e.touches[0].clientX); });
+        }
+
+        // Fixed Virtual Clinic Tour Image Switcher
+        function switchTourImage(localSrc, captionText, fallbackSrc, btn) {
+            const mainImg = document.getElementById('tour-main-img');
+            const caption = document.getElementById('tour-caption');
+            
+            mainImg.src = localSrc;
+            mainImg.onerror = function() {
+                this.onerror = null;
+                this.src = fallbackSrc;
+            };
+            caption.innerText = captionText;
+
+            document.querySelectorAll('.tour-thumb').forEach(t => {
+                t.classList.remove('border-brand-500');
+                t.classList.add('border-transparent');
+            });
+            btn.classList.remove('border-transparent');
+            btn.classList.add('border-brand-500');
+        }
+
+        // Teeth Whitening Shade Simulator
+        function openShadeSimulator() {
+            document.getElementById('shade-modal').classList.remove('hidden');
+        }
+        function closeShadeSimulator() {
+            document.getElementById('shade-modal').classList.add('hidden');
+        }
+        function updateShadeSimulator(val) {
+            const toothIcon = document.getElementById('tooth-icon');
+            const label = document.getElementById('shade-label');
+            const desc = document.getElementById('shade-desc');
+
+            const shades = [
+                { color: '#854d0e', text: 'Shade level: Heavy Stained (A4)', desc: 'Deep discoloration from coffee or habits.' },
+                { color: '#ca8a04', text: 'Shade level: Moderate Stain (A3)', desc: 'Standard natural enamel color with slight yellowing.' },
+                { color: '#fef08a', text: 'Shade level: Natural Light (A1)', desc: 'Clean, healthy natural tooth tone.' },
+                { color: '#f8fafc', text: 'Shade level: Bright White (B1)', desc: 'Laser polished smile grade.' },
+                { color: '#ffffff', text: 'Shade level: Hollywood Celebrity White', desc: 'Ultra radiant maximum brightness!' }
+            ];
+
+            const active = shades[val - 1];
+            toothIcon.style.color = active.color;
+            label.innerText = active.text;
+            desc.innerText = active.desc;
+        }
+
+        // Booking Modal Wizard
+        function openBookingModal(preselectedService = '', preselectedDoctor = '') {
+            if (preselectedService) {
+                document.getElementById('book-service').value = preselectedService;
+            }
+            if (preselectedDoctor) {
+                document.getElementById('book-doctor').value = preselectedDoctor;
+            }
+            
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('book-date').value = tomorrow.toISOString().split('T')[0];
+
+            goToBookingStep(1);
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function goToBookingStep(stepNum) {
+            document.querySelectorAll('.wizard-step').forEach(el => el.classList.add('hidden'));
+            document.getElementById('booking-success').classList.add('hidden');
+
+            document.getElementById(`booking-step-${stepNum}`).classList.remove('hidden');
+
+            const wizardBar = document.getElementById('wizard-bar');
+            if (stepNum === 1) wizardBar.style.width = '0%';
+            if (stepNum === 2) wizardBar.style.width = '50%';
+            if (stepNum === 3) wizardBar.style.width = '100%';
+
+            for (let i = 1; i <= 3; i++) {
+                const dot = document.getElementById(`dot-step-${i}`);
+                if (i <= stepNum) {
+                    dot.classList.remove('bg-slate-200', 'text-slate-600');
+                    dot.classList.add('bg-brand-600', 'text-white');
+                } else {
+                    dot.classList.remove('bg-brand-600', 'text-white');
+                    dot.classList.add('bg-slate-200', 'text-slate-600');
+                }
+            }
+        }
+
+        function selectTimeSlot(btn) {
+            document.querySelectorAll('.time-slot-btn').forEach(b => {
+                b.classList.remove('bg-brand-600', 'text-white', 'border-brand-600');
+                b.classList.add('border-slate-200', 'text-slate-700');
+            });
+            btn.classList.add('bg-brand-600', 'text-white', 'border-brand-600');
+            selectedTimeSlot = btn.innerText;
+        }
+
+        function confirmBooking() {
+            const service = document.getElementById('book-service').value;
+            const doctor = document.getElementById('book-doctor').value;
+            const date = document.getElementById('book-date').value;
+            const slot = selectedTimeSlot || '10:00 AM';
+
+            document.getElementById('summary-service').innerText = service;
+            document.getElementById('summary-doctor').innerText = doctor;
+            document.getElementById('summary-datetime').innerText = `${date} at ${slot}`;
+
+            document.querySelectorAll('.wizard-step').forEach(el => el.classList.add('hidden'));
+            document.getElementById('booking-success').classList.remove('hidden');
+        }
+
+        // Contact Form Submission
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('contact-success-msg');
+            msg.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => { msg.classList.add('hidden'); }, 5000);
+        }
+
+        // Authentication Modal
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function switchAuthTab(mode) {
+            currentAuthMode = mode;
+            const tabLogin = document.getElementById('auth-tab-login');
+            const tabRegister = document.getElementById('auth-tab-register');
+            const nameField = document.getElementById('field-name');
+            const submitBtn = document.getElementById('auth-submit-btn');
+
+            if (mode === 'login') {
+                tabLogin.classList.add('border-brand-600', 'text-brand-600');
+                tabLogin.classList.remove('border-transparent', 'text-slate-400');
+                tabRegister.classList.remove('border-brand-600', 'text-brand-600');
+                tabRegister.classList.add('border-transparent', 'text-slate-400');
+                nameField.classList.add('hidden');
+                submitBtn.innerText = 'Sign In';
+            } else {
+                tabRegister.classList.add('border-brand-600', 'text-brand-600');
+                tabRegister.classList.remove('border-transparent', 'text-slate-400');
+                tabLogin.classList.remove('border-brand-600', 'text-brand-600');
+                tabLogin.classList.add('border-transparent', 'text-slate-400');
+                nameField.classList.remove('hidden');
+                submitBtn.innerText = 'Create Account';
+            }
+        }
+
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const nameInput = document.getElementById('auth-name').value;
+            
+            currentUser = {
+                name: currentAuthMode === 'register' ? (nameInput || 'Patient') : email.split('@')[0],
+                email: email
+            };
+
+            document.getElementById('auth-btn').classList.add('hidden');
+            const badge = document.getElementById('user-profile-badge');
+            badge.classList.remove('hidden');
+            badge.classList.add('flex');
+            document.getElementById('user-name-display').innerText = currentUser.name;
+
+            closeAuthModal();
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            document.getElementById('auth-btn').classList.remove('hidden');
+            const badge = document.getElementById('user-profile-badge');
+            badge.classList.add('hidden');
+            badge.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
